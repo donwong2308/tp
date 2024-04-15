@@ -249,9 +249,7 @@ Step 2. The user now wants to find a person who is free at a given time of a giv
 
 Step 3. The further behavior of the code relies on the original behavior of `FindCommmand` of `AB3`.
 
-The following sequence diagram shows how an `whoisfree` operation goes through the `Logic` component:
-
-<puml src="diagrams/FindFreePersonSequenceDiagram-Logic.puml" alt="FindFreePersonSequenceDiagram-Logic" />
+The sequence diagram of how an `whoisfree` operation goes through the `Logic` component is similar to other `Command` operations.
 
 #### Design Considerations:
 
