@@ -43,10 +43,7 @@ It can also help regular users refresh their memory if they forget any of the co
 <div style="page-break-after: always;"></div>
 
 <!-- * Table of Contents -->
-## Table of Contents
-<page-nav-print />
-
----
+<page-nav-print>Table of Contents</page-nav-print>
 
 <div style="page-break-after: always;"></div>
 
