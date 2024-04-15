@@ -27,11 +27,6 @@ It can also help regular users refresh their memory if they forget any of the co
 
 ---
 
-<div style="page-break-after: always;"></div>
-
-<!-- * Table of Contents -->
-<page-nav-print />
-
 ## Using This User Guide
 
 ### Searching for Keywords
@@ -42,6 +37,14 @@ It can also help regular users refresh their memory if they forget any of the co
 
 ### Additional Note
 - **Copying and Pasting from this User Guide** <br> If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+---
+
+<div style="page-break-after: always;"></div>
+
+<!-- * Table of Contents -->
+## Table of Contents
+<page-nav-print />
 
 ---
 
@@ -242,6 +245,8 @@ Examples:
 
 Closes the Dormie application.
 
+<div style="page-break-after: always;"></div>
+
 ### Filter the contact list by name : `find`
 
 View all contacts whose names contain the user input keyword/s.
@@ -294,6 +299,8 @@ Note:
 
 Dormie data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+<div style="page-break-after: always;"></div>
+
 ### Editing the data file
 
 Dormie data are saved automatically as a JSON file [JAR file location]/data/dormie.json. Advanced users are welcome to update data directly by editing that data file.
@@ -315,7 +322,6 @@ Shows up next to a contact when room number might be outdated. If a room number 
 <img src="images/birthday_cake.png" alt="birthday_cake" width="24"/>
 <br>
 Shows up next to a contact when the contact's birthday is today. If the birthday icon shows up, it might be a good idea to wish your friend "Happy Birthday".
-
 
 ---
 
