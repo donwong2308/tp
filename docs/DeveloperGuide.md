@@ -130,15 +130,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
-
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -258,9 +249,7 @@ Step 2. The user now wants to find a person who is free at a given time of a giv
 
 Step 3. The further behavior of the code relies on the original behavior of `FindCommmand` of `AB3`.
 
-The following sequence diagram shows how an `whoisfree` operation goes through the `Logic` component:
-
-<puml src="diagrams/FindFreePersonSequenceDiagram-Logic.puml" alt="FindFreePersonSequenceDiagram-Logic" />
+The sequence diagram of how an `whoisfree` operation goes through the `Logic` component is similar to other `Command` operations.
 
 #### Design Considerations:
 
@@ -467,15 +456,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The user interface should be intuitive enough for users who are not IT-savvy.
 5.  The product should respond within one second.
+6.  Ensure seamless functionality even without an internet connection.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS.
-* **Private contact detail**: A contact detail that is not meant to be shared with others.
-* **GUI**: Graphical User Interface, the visual interface through which users interact with the application.
-* **Performance**: The speed at which the application responds to user input.
+* **API**: Application Programming Interface, a set of rules that allows one software application to interact with another.
 * **Command**: A text-based instruction given to the application to perform a specific task.
-* **Telegram**: A messaging app.
+* **GUI**: Graphical User Interface, the visual interface through which users interact with the application.
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
+* **Performance**: The speed at which the application responds to user input.
 * **Telegram handle**: A unique identifier for a user in Telegram.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -517,7 +506,7 @@ When `Default Person List` is mentioned, it refers the the default persons which
 
     1. Download the jar file and copy into an empty folder.
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file <br> Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -554,7 +543,7 @@ When `Default Person List` is mentioned, it refers the the default persons which
        Expected: No person is deleted. Error details shown in the status message.<br>
        Status Message:<br>`Invalid command format! delete: Deletes the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer) Example: delete 1`
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. Deleting a person while some persons are being shown
@@ -668,6 +657,7 @@ Team size: 5
    * Currently, a free time interval can only be specified based on a single day. There is no way to specify a free time interval that spans multiple day.
    * To improve user experience, it could be useful to enable cross day free time interval, such as `Mon:2000-Tue:0800`.
 
+
 2. **Enable free time interval merging:**
    * Currently, a person can have overlapping free time intervals.
      * For example, a person can have free time intervals of `Mon:1000-1200` and `Mon:1100-1300`, or `Mon:2000-2359` and `Tue:0000-0800`.
@@ -676,22 +666,27 @@ Team size: 5
      * For example, `Mon:2000-2359` and `Tue:0000-0800` can be combined as `Mon:2000-Tue:0800`.
    * The merging process could be done when new free time tag is added to the person, e.g. via `add` command, `addTime` command, or `edit` command.
 
+
 3. **Delete free time within an interval:**
    * Additionally, it could be useful to be able to delete free times that fall within a time interval, e.g. via `deleteTime` command.
    * For example, an initial freeTimeTag could be `Mon:1000-1400`. Executing `deleteTime INDEX ft/Mon:1100-1200` will result in the new freeTimeTags `Mon:1000-1100` and `Mon:1200-1400`.
+
 
 4. **Make command prefixes case-insensitive:**
    * Currently, the command prefixes are case-sensitive.
      * For example, `n/` is the prefix for "name" parameter, but `N/` is not acceptable by the command parser.
    * It may provide more convenience to user by disabling case sensitivity for prefixes. For example, allowing `n/` and `N/` as the prefix for `name` parameter.
 
+
 5. **Supporting more forms of name:**
    * Currently, only name form that consist of alphanumeric characters and spaces in between is allowed.
    * It may improve the diversity of the application, by supporting name in different forms, including names in different languages and names that contain non-alphanumeric symbols.
 
+
 6. **Supporting more forms of room number:**
    * Currently, the room number format is {block}-{floor}-{room number}, where block and room number are at least 2 alphanumeric characters and floor is strictly 2 alphanumeric characters. e.g. `nw-12-12`.
    * To accommodate more room number formats, it will be good to change the minimum length of block and room number as 1.
+
 
 7. **Make day formats case-insensitive:**
    * Currently, day formats in free time tag and the timestamp for the `whoisfree` command only accepts days from Mon-Sun.
@@ -699,11 +694,13 @@ Team size: 5
    * It may provide more convenience to user by making day formats case-insensitive
      * For example, Timestamp: `mon:1300`, `MON:1300`, Free time tag: `mon:1000-1200`, `MON:1000-1200`.
 
+
 8. **Support more accurate free time:**
    * A person may not always be free for the same time interval every week. 
      * For example, a person can be free at `Mon:1000-1200` for every odd week of the semester, and busy at the time for every even week of the semester.
    * Hence, it will be useful for the user to optionally specify an actual date as part of the free time interval, e.g. `01/01:Mon:1000-1200`.
      * If the date is not specified, e.g. `Mon:1000-1200`, the free time tag should be interpreted as recurring weekly.
+
      
 9. **Make the "Invalid command format" error message more specific:**
    * When user provides a command with invalid format, the "Invalid command format" error message is too general. 
@@ -711,10 +708,7 @@ Team size: 5
      * In this case, the command is invalid as some mandatory parameters are omitted, but new users may not expect that some parameters are mandatory.
    * Hence, the "Invalid command format" error message can be enhanced to be more specific, such that user can easily identify the reason of command failure.
 
+
 10. **Make the `whoisfree` command to search for a range of time:**
     * When user perform a `whoisfree` command, it might be useful to ascertain that a person would be free for the whole duration.
     * For example, `whoisfree Mon:1200-1400` will display all persons that are free for the time interval.
-
-
-
-
